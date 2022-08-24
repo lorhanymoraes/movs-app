@@ -19,7 +19,6 @@
 		0D94DA7D288845B100496E5F /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D94DA7C288845B100496E5F /* ModelError.swift */; };
 		0DA12446287CE44E000A7037 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA12445287CE44E000A7037 /* MovieAPI.swift */; };
 		0DA1244A287DF6BB000A7037 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA12449287DF6BB000A7037 /* DescriptionTableViewCell.swift */; };
-		0DB54ED8288B2D590005AB4C /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB54ED7288B2D590005AB4C /* Favorites.swift */; };
 		0DB54EDA288B2E8E0005AB4C /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB54ED9288B2E8E0005AB4C /* FavoritesManager.swift */; };
 		0DB54EDC288B370C0005AB4C /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB54EDB288B370C0005AB4C /* FavoritesTableViewController.swift */; };
 		0DB54EDE288B389B0005AB4C /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB54EDD288B389B0005AB4C /* FavoritesTableViewCell.swift */; };
@@ -41,7 +40,6 @@
 		0D94DA7C288845B100496E5F /* ModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelError.swift; sourceTree = "<group>"; };
 		0DA12445287CE44E000A7037 /* MovieAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
 		0DA12449287DF6BB000A7037 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
-		0DB54ED7288B2D590005AB4C /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		0DB54ED9288B2E8E0005AB4C /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		0DB54EDB288B370C0005AB4C /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		0DB54EDD288B389B0005AB4C /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				0D3767C228775642001681E4 /* Main.storyboard */,
 				0DB54EDD288B389B0005AB4C /* FavoritesTableViewCell.swift */,
 				0DB54EDB288B370C0005AB4C /* FavoritesTableViewController.swift */,
-				0DB54ED7288B2D590005AB4C /* Favorites.swift */,
 				0DB54ED9288B2E8E0005AB4C /* FavoritesManager.swift */,
 				0D638FE62888F65C003402DF /* MoviesView */,
 				0D638FE72888F684003402DF /* MovieConfiguration */,
@@ -275,7 +272,6 @@
 				0DA1244A287DF6BB000A7037 /* DescriptionTableViewCell.swift in Sources */,
 				0D3767D12877608A001681E4 /* MoviesTableViewController.swift in Sources */,
 				0D3767BD28775642001681E4 /* AppDelegate.swift in Sources */,
-				0DB54ED8288B2D590005AB4C /* Favorites.swift in Sources */,
 				0D2488EA287FA27D001745A8 /* ResultViewController.swift in Sources */,
 				0DB54EDA288B2E8E0005AB4C /* FavoritesManager.swift in Sources */,
 				0D94DA7D288845B100496E5F /* ModelError.swift in Sources */,

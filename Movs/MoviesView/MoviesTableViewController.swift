@@ -12,6 +12,7 @@ import SwiftyJSON
 class MoviesTableViewController: UITableViewController {
     
     var moviesInfo: [MoviesResult] = []
+    var infoMovie = [MoviesResult]()
     var allMovies: APIMovies?
     var currentPage = 1
     var limit = 20
@@ -45,14 +46,7 @@ class MoviesTableViewController: UITableViewController {
                 
             }
         }
-    }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let viewController = segue.destination as! ResultViewController
-        viewController.infoMovies = allMovies?.results?[tableView.indexPathForSelectedRow!.row]
-    }
-    
+    }    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return moviesInfo.count
@@ -68,6 +62,13 @@ class MoviesTableViewController: UITableViewController {
         
         return cell
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let viewController = segue.destination as? ResultViewController else {return}
+        let movies = moviesInfo[tableView.indexPathForSelectedRow!.row]
+        viewController.infoMovies = movies
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         print("scrollViewDidEndDragging")
@@ -89,7 +90,7 @@ class MoviesTableViewController: UITableViewController {
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
-            // print("this is the last cell")
+            print("this is the last cell")
             let spinner = UIActivityIndicatorView(style: .large)
             spinner.startAnimating()
             spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))

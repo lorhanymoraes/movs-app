@@ -9,7 +9,6 @@ import UIKit
 import Kingfisher
 import SwiftUI
 
-
 class ResultViewController: UIViewController {
     
     
@@ -22,46 +21,37 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var ivBackdrop: UIImageView!
     
-    
-    var movies: APIMovies?
     var infoMovies: MoviesResult?
-    var movieID: Int?
-    var favMovie: FavoritedMovie?
-    var favoritesMovie = [FavoritedMovie]()
+    var movieID: Int!
+    var favoritesMovie = [MoviesResult]()
     var isMovieFav = UserDefaults.standard.bool(forKey: "favorites2")
-    var favoritedMovie: [FavoritedMovie] = []
-    var movieApi: MovieAPI?
     var allGenres: GenresResponse?
+    var idGenre: [Genre] = []
    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        loading.startAnimating()
         viewConfiguration()
         getFavorites()
         changeButton()
-        getGenre()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         changeButton()
+        getGenre()
     }
     
     func viewConfiguration() {
         lbMovieTitle.text = infoMovies?.originalTitle ?? " "
         lbReleaseYear.text = infoMovies?.releaseYear ?? " "
         lbMovieDescription.text = infoMovies?.overview
-//        lbGenre.text = allGenres?.name ?? "n/a"
-        
         if let urlPoster = URL(string: infoMovies?.backUrlString ?? " ") {
             ivBackdrop.kf.indicatorType = .activity
             ivBackdrop.kf.setImage(with: urlPoster)
         } else {
             ivBackdrop.image = nil
         }
-        
         ivMovies.layer.cornerRadius = 15
         
         if let url = URL(string: infoMovies?.posterUrlString ?? "") {
@@ -73,47 +63,40 @@ class ResultViewController: UIViewController {
         loading.stopAnimating()
     }
     
-    func getGenre(){
+    func getGenre() {
         MovieAPI.getGenres (onComplete: { (genres) in
-            if let genres = self.allGenres?.genres {
-                self.lbGenre.text = genres.map({ $0.name }).joined(separator: ", ")
-            } else {
-                self.lbGenre.text = "N/A"
-            }
+            self.allGenres = genres
+            self.filterGenres()
         }) { (error) in
             switch error {
             case .noResponse:
                 print("\(ModelError.noResponse)")
             default:
                 print(error)
-                
             }
         }
     }
     
-//    func getMovieGenre() {
-//        MovieAPI.loadInfoMovie(movieID: movieID ?? 0, onComplete:  { (movie) in
-//            let movie = self.infoMovies
-//            if let genres = movie?.genres, genres.count > 0 {
-//                self.lbGenre.text = genres.map({$0.name}).joined(separator: ", ")
-//            } else {
-//                self.lbGenre.text = "N/A"
-//            }
-//        }) { (error) in
-//            switch error {
-//            case .noResponse:
-//                print("\(ModelError.noResponse)")
-//            default:
-//                print(error)
-//
-//            }
-//        }
-//    }
+    func filterGenres() {
+        let genresIds = infoMovies?.genreIds
+        
+        let genres = self.allGenres?.genres.filter({ genre in
+            genresIds?.contains(genre.id) ?? false
+        })
+        
+        let genresName = genres?.map({ genre in
+            genre.name
+        })
+        
+        self.lbGenre.text = genresName?.joined(separator: ", ")
+    }
+    
     
     
     @IBAction func selectButton(_ sender: UIButton) {
         
         MovieAPI.loadInfoMovie(movieID: infoMovies?.id ?? 0, onComplete: { (movie) in
+           
             if let movie = movie {
                 
                 dump(movie)
@@ -139,6 +122,7 @@ class ResultViewController: UIViewController {
             
             switch result {
             case .success(let favorites):
+        
                 self.favoritesMovie = favorites
                 
             case .failure(let error):
@@ -167,7 +151,8 @@ class ResultViewController: UIViewController {
     
     func addMovieToFavorites(with movie: MoviesResult) {
         
-        let favoritedMovie = FavoritedMovie(id: movie.id, title: movie.originalTitle, posterPath: movie.posterUrlString)
+        let favoritedMovie = MoviesResult(posterPath: movie.posterPath, adult: movie.adult, overview: movie.overview, releaseDate: movie.releaseDate, genreIds: movie.genreIds, id: movie.id, originalTitle: movie.originalTitle, originalLanguage: movie.originalTitle, title: movie.title, backdropPath: movie.backdropPath, popularity: movie.popularity, voteCount: movie.voteCount, video: movie.video, voteAvarage: movie.voteAvarage)
+
         
         PersistenceManager.updateWith(favoritedMovie: favoritedMovie, actionType: .add) { [weak self] error in
             guard self != nil else { return }

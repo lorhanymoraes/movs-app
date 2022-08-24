@@ -19,7 +19,7 @@ enum PersistenceManager {
         static let favouritesKey = "favorites2"
     }
     
-    static func updateWith(favoritedMovie: FavoritedMovie, actionType: PersistenceActionType, completed: @escaping (ModelError?) -> Void) {
+    static func updateWith(favoritedMovie: MoviesResult, actionType: PersistenceActionType, completed: @escaping (ModelError) -> Void) {
         
         retrieveFavorites { result in
             switch result {
@@ -35,18 +35,17 @@ enum PersistenceManager {
                 case .remove:
                     favorites.removeAll {$0.title == favoritedMovie.title}
                 }
-                
                 completed(save(favoritedMovies: favorites))
                 
             case .failure(let error):
                 completed(error)
-                print ("error inside retrieveFavorites method")
+                print("error favorites")
             }
         }
     }
     
     
-    static func retrieveFavorites(completed: @escaping (Result<[FavoritedMovie], ModelError>) -> Void) {
+    static func retrieveFavorites(completed: @escaping (Result<[MoviesResult], ModelError>) -> Void) {
         
         guard let favoritesData = defaults.object(forKey: Keys.favouritesKey) as? Data else {
             completed(.success([]))
@@ -55,7 +54,7 @@ enum PersistenceManager {
         
         do {
             let decoder = JSONDecoder()
-            let favorites = try decoder.decode([FavoritedMovie].self, from: favoritesData)
+            let favorites = try decoder.decode([MoviesResult].self, from: favoritesData)
             completed(.success(favorites))
         } catch {
             completed(.failure(.unableToFavorite))
@@ -64,13 +63,12 @@ enum PersistenceManager {
     }
     
     
-    static func save(favoritedMovies: [FavoritedMovie]) -> ModelError? {
-        
-        do{
+    static func save(favoritedMovies: [MoviesResult]) -> ModelError {
+        do {
             let encoder = JSONEncoder()
             let encodedFavorites = try encoder.encode(favoritedMovies)
             defaults.set(encodedFavorites, forKey: Keys.favouritesKey)
-            return nil
+            return .invalidJSON
         } catch {
             return .unableToFavorite
         }

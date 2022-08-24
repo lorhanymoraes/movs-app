@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 struct APIMovies: Codable {
-    var page: Int?
-    var results: [MoviesResult]?
-    var totalResults: Int
-    var totalPages: Int
+    let page: Int?
+    let results: [MoviesResult]?
+    let totalResults: Int
+    let totalPages: Int
     
     enum CodingKeys: String, CodingKey {
         case page
@@ -24,21 +24,14 @@ struct APIMovies: Codable {
 }
 
 
-struct MoviesResult: Codable {
-    //    static func == (lhs: MoviesResult, rhs: MoviesResult) -> Bool {
-    //        lhs.id == rhs.id
-    //    }
-    //    func hash(into hasher: inout Hasher) {
-    //        hasher.combine(id)
-    //    }
+struct MoviesResult: Codable, Hashable {
     
     let posterPath: String?
     let adult: Bool?
     let overview: String?
     let releaseDate: String?
-    var genreIds: [Int]?
-    let genres: [MovieGenre]?
-    var id: Int?
+    let genreIds: [Int]?
+    let id: Int?
     let originalTitle: String?
     let originalLanguage: String?
     let title: String?
@@ -47,12 +40,6 @@ struct MoviesResult: Codable {
     let voteCount: Int?
     let video: Bool?
     let voteAvarage: Double?
-    
-    
-    //    var genreText: String {
-    //        genres?.first?.name ?? "n/a"
-    //    }
-    
     
     var posterUrlString: String? {
         if let posterPath = posterPath {
@@ -108,7 +95,6 @@ struct MoviesResult: Codable {
         case overview
         case releaseDate = "release_date"
         case genreIds = "genre_ids"
-        case genres
         case id
         case originalTitle = "original_title"
         case originalLanguage = "original_language"
@@ -119,33 +105,6 @@ struct MoviesResult: Codable {
         case video
         case voteAvarage = "vote_avarage"
         
-        
     }
 }
-
-struct MovieGenre: Codable {
-    let id: Int
-    let name: String
-    
-    //    enum CodinKeys: String, CodingKey {
-    //        case Id = "id"
-    //        case name
-    //    }
-    //    init(from decoder: Decoder) throws {
-    //        let values = try decoder.container(keyedBy: CodingKeys.self)
-    //        Id = try values.decodeIfPresent(Int.self, forKey: .Id)
-    //        name = try values.decodeIfPresent(String.self, forKey: .name)
-    //    }
-    
-}
-
-
-//extension MovieGenre: Equatable {
-//    public static func == (lhs: MovieGenre, rhs: MovieGenre) -> Bool {
-//        return lhs.id == rhs.id &&
-//            lhs.name == rhs.name
-//    }
-//}
-
-
 

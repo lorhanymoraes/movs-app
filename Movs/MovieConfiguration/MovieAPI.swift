@@ -77,7 +77,7 @@ class MovieAPI {
         }
     }
     
-    class func getGenres(onComplete: @escaping ([Genre]) -> Void, onError: @escaping (ModelError) -> Void) {
+    class func getGenres(onComplete: @escaping (GenresResponse) -> Void, onError: @escaping (ModelError) -> Void) {
         let genreURL = baseGenre + "\("genre/movie/list")?api_key=\(apiKey)&language=\(language)"
         print(genreURL)
         
@@ -94,7 +94,7 @@ class MovieAPI {
                 
                 do{
                     let genres = try JSONDecoder().decode(GenresResponse.self, from: data)
-                    onComplete(genres.genres)
+                    onComplete(genres)
                 } catch {
                     print(error.localizedDescription)
                     onError(.invalidJSON)

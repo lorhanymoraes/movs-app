@@ -11,7 +11,7 @@
         <!--Result View Controller-->
         <scene sceneID="whO-GF-CqO">
             <objects>
-                <viewController id="Zj3-0V-JYa" customClass="ResultViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zj3-0V-JYa" customClass="ResultViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kw2-iA-bG8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -138,7 +138,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghm-MN-B3n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1013" y="761"/>
+            <point key="canvasLocation" x="-1225" y="761"/>
         </scene>
         <!--Movies-->
         <scene sceneID="Fc1-pS-RY9">
@@ -241,7 +241,7 @@
                                     <outlet property="lbDescription" destination="3ue-MY-euf" id="La7-eX-eOB"/>
                                     <outlet property="lbTitle" destination="LbY-dW-sRD" id="dQc-d9-X6u"/>
                                     <outlet property="lbYear" destination="lFO-8U-3lr" id="UkH-8S-mtU"/>
-                                    <segue destination="Zj3-0V-JYa" kind="show" id="zNZ-WP-PMc"/>
+                                    <segue destination="Zj3-0V-JYa" kind="show" id="yuV-i2-oRz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -344,6 +344,7 @@
                                     <outlet property="btFavorite" destination="Mb5-Va-3xb" id="nkn-kD-qqc"/>
                                     <outlet property="ivFavorite" destination="oHT-Gt-Ztx" id="kpK-LN-VtT"/>
                                     <outlet property="lbFavorites" destination="vfS-bE-sRV" id="CqQ-f5-xDm"/>
+                                    <segue destination="Zj3-0V-JYa" kind="show" identifier="favoriteSegue" id="DR7-zr-AcR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -479,6 +480,9 @@
             <point key="canvasLocation" x="18.840579710144929" y="69.642857142857139"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="yuV-i2-oRz"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="bolt.heart" catalog="system" width="128" height="109"/>
         <image name="bolt.heart.fill" catalog="system" width="128" height="109"/>
