@@ -1,4 +1,4 @@
-# chuck-norris-facts
+# MOVS
 App de filmes, consumindo dados da The MovieDB API (https://api.themoviedb.org/3/movie/), com a aba de favoritos. 
 
 
